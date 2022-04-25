@@ -30,7 +30,7 @@ jobs:
           file: unit-test.dockerfile
           context: .
           push: true
-          tags: lisaanis/springboot-coverage:latest
+          tags: lisaanis/mini-project-coverage:latest
   build:
     name: Build
     runs-on: ubuntu-18.04
@@ -80,9 +80,9 @@ jobs:
           username: ${{ secrets.EC2_SSH_USERNAME }}
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
-            docker stop mini-project springboot-coverage
-            docker rmi lisaanis/mini-project:latest lisaanis/springboot-coverage:latest
+            docker stop mini-project mini-project-coverage
+            docker rmi lisaanis/mini-project:latest lisaanis/mini-project-coverage:latest
             docker pull lisaanis/mini-project:latest
-            docker pull lisaanis/springboot-coverage:latest
-            docker run -d --rm --name springboot-coverage -p 8000:80 lisaanis/springboot-coverage:latest
+            docker pull lisaanis/mini-project-coverage:latest
+            docker run -d --rm --name mini-project-coverage -p 8000:80 lisaanis/mini-project-coverage:latest
             docker run -d --rm --name mini-project -p 80:8080 --env-file=.dev.env --network my_network lisaanis/mini-project:latest
