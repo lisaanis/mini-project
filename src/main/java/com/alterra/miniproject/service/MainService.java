@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MainService {
     public ResponseEntity<Object> main() {
-        return ResponseUtil.build("Hello, welcome to my mini project!\nby: Lisa Anis Safitri", null, HttpStatus.OK);
+        return ResponseUtil.build("Hello World, Welcome to my mini project! by: Lisa Anis Safitri", null, HttpStatus.OK);
     }
 
     public ResponseEntity<Object> error(String message) {
