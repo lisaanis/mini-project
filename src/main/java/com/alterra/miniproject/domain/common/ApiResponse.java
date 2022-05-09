@@ -15,10 +15,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApiResponse<T> implements Serializable {
-    private static final long serialVersionUID = 5884826333671421841L;
+    private static final long serialVersionUID = 1L;
     
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime timestamp;
+
+    private String responseCode;
 
     private String message;
 

@@ -2,6 +2,7 @@ package com.alterra.miniproject.service;
 
 import java.util.Optional;
 
+import com.alterra.miniproject.constant.constants;
 import com.alterra.miniproject.domain.dao.Product;
 import com.alterra.miniproject.domain.dto.ProductRequest;
 import com.alterra.miniproject.repository.ProductRepository;
@@ -28,12 +29,12 @@ public class ProductService {
             .material(request.getMaterial())
             .build();
         product = productRepository.save(product);
-        return ResponseUtil.build("Success", product, HttpStatus.OK);
+        return ResponseUtil.build(constants.ResponseCode.SUCCESS, product, HttpStatus.OK);
     }
 
     public ResponseEntity<Object> getAll() {
         log.info("Get all products");
-        return ResponseUtil.build("Success", productRepository.findAll(), HttpStatus.OK);
+        return ResponseUtil.build(constants.ResponseCode.SUCCESS, productRepository.findAll(), HttpStatus.OK);
     }
 
     // public ResponseEntity<Object> getById(Long id) {

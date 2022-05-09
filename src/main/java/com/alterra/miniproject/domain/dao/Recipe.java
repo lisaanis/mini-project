@@ -3,52 +3,50 @@ package com.alterra.miniproject.domain.dao;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
+import java.util.List;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.alterra.miniproject.domain.common.BaseEntityWithDeletedAt;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
+@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "Recipe")
-public class Recipe {
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+@Table(name = "M_RECIPE")
+public class Recipe extends BaseEntityWithDeletedAt{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", nullable = false)
-    private Long userId; 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "recipe_name", nullable = false)
     private String recipeName; 
 
-    @Column(name = "category_id", nullable = false)
-    private Long categoryId; 
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     @Column(name = "description", nullable = false)
     private String description; 
 
-    @Column(name = "created_at", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
-    private LocalDateTime createdAt;
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    private RecipeDetail detail;
 
-    @Column(name = "updated_at")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
-    private LocalDateTime updatedAt;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "recipe")
+    private List<Comment> comments;
 
-    @PrePersist
-    void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
 }

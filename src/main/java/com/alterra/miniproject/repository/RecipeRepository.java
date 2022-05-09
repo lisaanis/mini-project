@@ -1,11 +1,11 @@
 package com.alterra.miniproject.repository;
 
 import com.alterra.miniproject.domain.dao.Recipe;
+import com.alterra.miniproject.repository.softdeletes.SoftDeletesRepository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RecipeRepository extends JpaRepository<Recipe, Long> {
+public interface RecipeRepository extends SoftDeletesRepository<Recipe, Long> {
     
 }
