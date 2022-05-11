@@ -1,10 +1,11 @@
 package com.alterra.miniproject.domain.dao;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
 
 import com.alterra.miniproject.domain.common.BaseEntityWithDeletedAt;
@@ -14,7 +15,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
@@ -22,7 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 public class RecipeDetail extends BaseEntityWithDeletedAt{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long recipeId;
 
     @OneToOne(mappedBy = "detail")
     @JoinColumn(name = "recipe_id", nullable = false)

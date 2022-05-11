@@ -35,13 +35,13 @@ public class SoftDeletesRepositoryImpl<T, ID extends Serializable> extends Simpl
     }
 
     @Override
-    public List<T> findAll() {
+    public List<T> findAll(){
         if (isFieldDeletedAtExists()) return super.findAll(notDeleted());
         return super.findAll();
     }
 
     @Override
-    public List<T> findAll(Sort sort) {
+    public List<T> findAll(Sort sort){
         if (isFieldDeletedAtExists()) return super.findAll(notDeleted(), sort);
         return super.findAll(sort);
     }
@@ -120,7 +120,7 @@ public class SoftDeletesRepositoryImpl<T, ID extends Serializable> extends Simpl
 
     private static final class ByIdSpecification<T, ID> implements Specification<T> {
 
-        private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 6523470832851906115L;
         private final transient JpaEntityInformation<T, ?> entityInformation;
         private final transient ID id;
 
@@ -137,7 +137,7 @@ public class SoftDeletesRepositoryImpl<T, ID extends Serializable> extends Simpl
 
     private static final class DeletedIsNUll<T> implements Specification<T> {
 
-        private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = -940322276301888908L;
 
         @Override
         public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {

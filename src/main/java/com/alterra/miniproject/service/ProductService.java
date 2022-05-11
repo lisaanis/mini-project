@@ -1,7 +1,5 @@
 package com.alterra.miniproject.service;
 
-import java.util.Optional;
-
 import com.alterra.miniproject.constant.constants;
 import com.alterra.miniproject.domain.dao.Product;
 import com.alterra.miniproject.domain.dto.ProductRequest;

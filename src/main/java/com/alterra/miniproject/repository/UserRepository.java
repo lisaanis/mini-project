@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends SoftDeletesRepository<User, Long>{
-    
+    User getDistinctTopByUsername(String username);
 }
