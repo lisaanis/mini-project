@@ -68,7 +68,7 @@ public class RecipeService {
     public ResponseEntity<Object> getRecipeDetail(Long recipeId) {
         log.info("Find recipe detail by recipe id: {}", recipeId);
         Optional<RecipeDetail> recipeDetail = recipeDetailRepository.findOne(recipeId);
-        if (recipeDetail.isEmpty()) return ResponseEntity.badRequest().body(Map.ofEntries(Map.entry("message", "Data not found")));
+        if (recipeDetail.isEmpty()) return ResponseEntity.badRequest().body(Map.ofEntries(Map.entry("message", "Data tidak ditemukan")));
 
         return ResponseEntity.ok().body(recipeDetail.get());
     }
@@ -80,21 +80,27 @@ public class RecipeService {
             recipeRepository.delete(recipeId);
         } catch (EmptyResultDataAccessException e) {
             log.error("Data not found, Error: {}", e.getMessage());
-            return ResponseEntity.badRequest().body(Map.ofEntries(Map.entry("mesage", "Data not found")));
+            return ResponseEntity.badRequest().body(Map.ofEntries(Map.entry("mesage", "Data tidak ditemukan")));
         }
-        return ResponseEntity.ok().body(Map.ofEntries(Map.entry("message", "ok")));
+        return ResponseEntity.ok().body(Map.ofEntries(Map.entry("message", "berhasil hapus")));
     }
 
     public ResponseEntity<Object> updateRecipe(RecipeRequest request, Long recipeId) {
         log.info("Update recipe: {}", request);
         Optional<Recipe> recipe = recipeRepository.findOne(recipeId);
-        if (recipe.isEmpty()) return ResponseEntity.badRequest().body(Map.ofEntries(Map.entry("message", "Data not found")));
+        if (recipe.isEmpty()) return ResponseEntity.badRequest().body(Map.ofEntries(Map.entry("message", "Data tidak ditemukan")));
+
+        log.info("Find category by category id");
+        Optional<Category> category = categoryRepository.findOne(request.getCategoryId());
+        if(category.isEmpty()) return ResponseEntity.notFound().build();
 
         recipe.get().setRecipeName(request.getRecipeName());
-        //recipe.get().setCategory(category.get());
+        recipe.get().setCategory(category.get());
         recipe.get().setDescription(request.getDescription());
-        //recipe.get().setDetail(request.getIngredients());
-        //recipe.get().setDetail(request.getDirections());
+        recipe.get().setDetail(RecipeDetail.builder()
+            .ingredients(request.getIngredients())
+            .directions(request.getDirections())
+            .build());
         
         recipeRepository.save(recipe.get());
         return ResponseEntity.ok().body(recipe.get());

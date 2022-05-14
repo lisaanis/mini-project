@@ -18,7 +18,7 @@ public class ResponseUtil {
     private static <T> ApiResponse<T> build(constants.ResponseCode responseCode, T data) {
         return ApiResponse.<T>builder()
                 .timestamp(LocalDateTime.now())
-                .responseCode(responseCode.name())
+                //.responseCode(responseCode.name())
                 .message(responseCode.getMessage())
                 .data(data)
                 .build();

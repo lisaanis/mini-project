@@ -27,7 +27,7 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public ResponseEntity<Object> save(CategoryRequest request) {
+    public ResponseEntity<Object> addCategory(CategoryRequest request) {
         log.info("Save new category: {}", request);
         Category category = Category.builder()
             .category(request.getCategory())
@@ -63,7 +63,6 @@ public class CategoryService {
         categoryRepository.save(category.get());
         return ResponseEntity.ok().body(category.get());
     }
-
 
     public ResponseEntity<Object> deleteCategory(Long id) {
         log.info("Find category detail by category id for delete: {}", id);

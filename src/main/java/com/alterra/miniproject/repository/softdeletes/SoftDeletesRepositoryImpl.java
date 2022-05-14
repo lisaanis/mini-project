@@ -120,7 +120,7 @@ public class SoftDeletesRepositoryImpl<T, ID extends Serializable> extends Simpl
 
     private static final class ByIdSpecification<T, ID> implements Specification<T> {
 
-        private static final long serialVersionUID = 6523470832851906115L;
+        private static final long serialVersionUID = 1L;
         private final transient JpaEntityInformation<T, ?> entityInformation;
         private final transient ID id;
 
@@ -137,7 +137,7 @@ public class SoftDeletesRepositoryImpl<T, ID extends Serializable> extends Simpl
 
     private static final class DeletedIsNUll<T> implements Specification<T> {
 
-        private static final long serialVersionUID = -940322276301888908L;
+        private static final long serialVersionUID = 1L;
 
         @Override
         public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {

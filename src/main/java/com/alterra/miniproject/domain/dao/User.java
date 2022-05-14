@@ -28,6 +28,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @Table(name = "M_USER")
 public class User extends BaseEntityWithDeletedAt implements UserDetails{
 
+    private static final long serialVersionUID = 5703123232205376654L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

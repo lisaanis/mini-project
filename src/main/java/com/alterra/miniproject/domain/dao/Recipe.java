@@ -23,6 +23,9 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Table(name = "M_RECIPE")
 public class Recipe extends BaseEntityWithDeletedAt{
+
+    private static final long serialVersionUID = 5703123232205376654L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
