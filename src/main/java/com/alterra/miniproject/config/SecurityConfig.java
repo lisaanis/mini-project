@@ -43,10 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().disable();
         http.csrf().disable()
             .authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
-                .anyRequest().authenticated();
+            .antMatchers("/auth/**", "/h2-console/**").permitAll()
+            .anyRequest().authenticated();
         //remove session
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         //filter jwt

@@ -1,8 +1,7 @@
-package com.alterra.miniproject.service.impl;
+package com.alterra.miniproject.service;
 
 import com.alterra.miniproject.domain.dao.User;
 import com.alterra.miniproject.repository.UserRepository;
-import com.alterra.miniproject.service.UserService;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,6 +1,5 @@
 package com.alterra.miniproject.service;
 
-import java.util.Map;
 import java.util.Optional;
 
 import com.alterra.miniproject.constant.constants;
@@ -42,37 +41,56 @@ public class CategoryService {
     }
 
     public ResponseEntity<Object> getAllCategories() {
-        log.info("Get all categories");
-        return ResponseEntity.ok().body(categoryRepository.findAll());
+        try {
+            log.info("Get all categories");
+            return ResponseUtil.build(constants.ResponseCode.SUCCESS, categoryRepository.findAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Get an error by get all categories, Error : {}",e.getMessage());
+            return ResponseUtil.build(constants.ResponseCode.UNKNOWN_ERROR,null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     public ResponseEntity<Object> getCategoryDetail (Long id) {
-        log.info("Find category detail by category id: {}", id);
-        Optional<Category> categoryDetail = categoryRepository.findOne(id);
-        if (categoryDetail.isEmpty()) return ResponseEntity.badRequest().body(Map.ofEntries(Map.entry("message", "Data not found")));
-
-        return ResponseEntity.ok().body(categoryDetail.get());
+        try {
+            log.info("Find category detail by category id: {}", id);
+            Optional<Category> categoryDetail = categoryRepository.findOne(id);
+            if (categoryDetail.isEmpty()) {
+                log.info("category not found");
+                return ResponseUtil.build(constants.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
+            }
+            return ResponseUtil.build(constants.ResponseCode.SUCCESS, categoryDetail.get(), HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Get an error by executing get category by id, Error : {}",e.getMessage());
+            return ResponseUtil.build(constants.ResponseCode.UNKNOWN_ERROR,null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     public ResponseEntity<Object> updateCategory(CategoryRequest request, Long id) {
-        log.info("Update category: {}", request);
-        Optional<Category> category = categoryRepository.findOne(id);
-        if (category.isEmpty()) return ResponseEntity.badRequest().body(Map.ofEntries(Map.entry("message", "Data not found")));
-
-        category.get().setCategory(request.getCategory());
-        categoryRepository.save(category.get());
-        return ResponseEntity.ok().body(category.get());
+        try {
+            log.info("Update category: {}", request);
+            Optional<Category> category = categoryRepository.findOne(id);
+            if (category.isEmpty()) {
+                log.info("category not found");
+                return ResponseUtil.build(constants.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
+            }
+            category.get().setCategory(request.getCategory());
+            categoryRepository.save(category.get());
+            return ResponseUtil.build(constants.ResponseCode.SUCCESS, category.get(), HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Get an error by update category, Error : {}",e.getMessage());
+            return ResponseUtil.build(constants.ResponseCode.UNKNOWN_ERROR,null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     public ResponseEntity<Object> deleteCategory(Long id) {
-        log.info("Find category detail by category id for delete: {}", id);
         try {
+            log.info("Executing delete category by id: {}", id);
             categoryRepository.delete(id);
         } catch (EmptyResultDataAccessException e) {
             log.error("Data not found. Error: {}", e.getMessage());
-            return ResponseEntity.badRequest().body(Map.ofEntries(Map.entry("message", "Data not found")));
+            return ResponseUtil.build(constants.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok().body(Map.ofEntries(Map.entry("message", "ok")));
+        return ResponseUtil.build(constants.ResponseCode.SUCCESS, null, HttpStatus.OK);
     }
 
 }

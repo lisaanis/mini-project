@@ -1,4 +1,4 @@
-package com.alterra.miniproject.service.impl;
+package com.alterra.miniproject.service;
 
 
 import com.alterra.miniproject.domain.dao.User;
@@ -6,7 +6,6 @@ import com.alterra.miniproject.payload.TokenResponse;
 import com.alterra.miniproject.payload.UsernamePassword;
 import com.alterra.miniproject.repository.UserRepository;
 import com.alterra.miniproject.security.JwtProvider;
-import com.alterra.miniproject.service.AuthService;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

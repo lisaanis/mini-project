@@ -109,8 +109,10 @@
 						<exclude>**/config/*.class</exclude>
 						<exclude>**/constant/*.class</exclude>
 						<exclude>**/controller/*.class</exclude>
+						<exclude>**/payload/*.class</exclude>
+						<exclude>**/security/*.class</exclude>
 						<exclude>**/domain/**/*.class</exclude>
-						<exclude>**/repository/*.class</exclude>
+						<exclude>**/repository/**/*.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>

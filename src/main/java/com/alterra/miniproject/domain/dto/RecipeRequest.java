@@ -18,7 +18,8 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RecipeRequest implements Serializable {
     private static final long serialVersionUID =  1L;
-    
+
+    private Long id;
     private Long userId; 
     private String recipeName;
     private Long categoryId;

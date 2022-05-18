@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RecipeDetailRequest implements Serializable {
-    private static final long serialVersionUID =  -42256424879551154L;
+    private static final long serialVersionUID =  1L;
 
     private Long recipeId; 
     private String ingredients; 

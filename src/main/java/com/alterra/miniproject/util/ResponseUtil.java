@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 public class ResponseUtil {
-    
     private ResponseUtil() {}
 
     public static <T> ResponseEntity<Object> build(constants.ResponseCode responseCode, T data, HttpStatus httpStatus) {
@@ -18,7 +17,7 @@ public class ResponseUtil {
     private static <T> ApiResponse<T> build(constants.ResponseCode responseCode, T data) {
         return ApiResponse.<T>builder()
                 .timestamp(LocalDateTime.now())
-                //.responseCode(responseCode.name())
+                .responseCode(responseCode.name())
                 .message(responseCode.getMessage())
                 .data(data)
                 .build();

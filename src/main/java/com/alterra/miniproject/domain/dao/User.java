@@ -1,10 +1,10 @@
 package com.alterra.miniproject.domain.dao;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-//import lombok.experimental.SuperBuilder;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-//@SuperBuilder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
