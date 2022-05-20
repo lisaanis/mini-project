@@ -3,7 +3,7 @@ name: Spring Boot Mini Project Pipeline
 on:
   push:
     branches:
-      - main
+      - featureA
 
 jobs:
   run_test:
@@ -31,6 +31,7 @@ jobs:
           context: .
           push: true
           tags: lisaanis/mini-project-coverage:latest
+
   build:
     name: Build
     runs-on: ubuntu-18.04
@@ -56,6 +57,7 @@ jobs:
           context: .
           push: true
           tags: lisaanis/mini-project:latest
+
   deployment:
     name: Deploy container using SSH
     runs-on: ubuntu-18.04
